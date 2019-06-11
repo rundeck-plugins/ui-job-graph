@@ -1,0 +1,36 @@
+
+
+name: "@title@"
+rundeckPluginVersion: 1.2
+author: "@author@"
+date: "@date@"
+version: "@version@"
+url: "@url@"
+sourceLink: "https://github.com/rundeck-plugins/ui-job-graph"
+providers:
+    - name: "@name@"
+      service: UI
+      title: "@title@"
+      description: "@description@"
+      plugin-type: ui
+      ui:
+        - pages: ['menu/jobs','scheduledExecution/show']
+          styles:
+            - "css/ui-jobgraph.css"
+          scripts:
+            - "js/init.js"
+            - "js/d3.v4.min.js"
+            - "js/support.js"
+            - "js/graphlib-dot.min.js"
+            - "js/DagreD3Graph.js"
+            - "js/dagre-d3.min.js"
+            - "js/jobgraph.js"
+        - pages: ['execution/show']
+          scripts:
+            - "js/init.js"
+            - "js/d3.v4.min.js"
+            - "js/support.js"
+            - "js/graphlib-dot.min.js"
+            - "js/DagreD3Graph.js"
+            - "js/dagre-d3.min.js"
+            - "js/jobgraph.js"

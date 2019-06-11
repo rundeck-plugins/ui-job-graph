@@ -1,0 +1,165 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+/*
+ * Copyright 2016 SimplifyOps, Inc. (http://simplifyops.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+plugins {
+    id 'pl.allegro.tech.build.axion-release' version '1.7.0'
+    id 'com.bertramlabs.asset-pipeline' version '2.11.6'
+}
+
+ext.pluginName = 'Job Graph UI Plugin'
+ext.pluginDescription = 'Displays DAG of Jobs based on Job References.'
+ext.sopsCopyright = "© 2019, Rundeck, Inc."
+ext.sopsUrl = "http://rundeck.com"
+ext.buildDateString=new Date().format("yyyy-MM-dd'T'HH:mm:ssX")
+ext.archivesBaseName = "ui-job-graph"
+ext.pluginBaseFolder = "."
+
+
+scmVersion {
+    ignoreUncommittedChanges = true
+    tag {
+        prefix = ''
+        versionSeparator = ''
+        def origDeserialize=deserialize
+        //apend .0 to satisfy semver if the tag version is only X.Y
+        deserialize = { config, position, tagName ->
+            def orig = origDeserialize(config, position, tagName)
+            if (orig.split('\\.').length < 3) {
+                orig += ".0"
+            }
+            orig
+        }
+    }
+}
+
+project.version = scmVersion.version
+ext.archiveFilename = ext.archivesBaseName + '-' + version
+
+assets {
+    verbose = true
+    minifyJs = false
+    minifyCss = false
+    enableSourceMaps = false
+    enableGzip = false
+    configOptions = [:]
+
+    minifyOptions = [
+            languageMode     : 'ES5',
+            targetLanguage   : 'ES5', //Can go from ES6 to ES5 for those bleeding edgers
+            optimizationLevel: 'SIMPLE',
+            angularPass      : false // Can use @ngInject annotation for Angular Apps
+    ]
+
+//    includes = [/*'css*//*.css', */'js/*.js']
+    excludes = [
+            '**/*.less',
+            '**/*.html',
+            'js/lib/*.js',
+            'js/lib/**/*.js'
+    ]
+
+    //for plugin packaging
+    packagePlugin = false //set to true if this is a library
+
+    //developmentRuntime can be turned off
+    developmentRuntime = true
+
+    //if you want to customize the jar task this task runs on you can specify a jarTaskName
+    jarTaskName = null
+
+    // Can add custom asset locations (directories or individual jar files)
+    from "${project.projectDir}/src/main/rdplugin/assets"
+    compileDir = "${project.buildDir}/assets/resources"
+}
+
+defaultTasks 'build'
+
+configurations {
+    create('default')
+}
+
+task pluginZip(type: Jar) {
+    destinationDir = file("build/distributions")
+    baseName = project.ext.archivesBaseName
+    version = project.version
+    extension = 'zip'
+
+    from("${project.buildDir}/zip-contents") {
+        into(archiveFilename)
+        exclude "resources/manifest.properties"
+    }
+
+    manifest {
+        attributes 'Rundeck-Plugin-Name': pluginName.toString(),
+                   'Rundeck-Plugin-Description': pluginDescription.toString(),
+                   'Rundeck-Plugin-Archive': 'true',
+                   'Rundeck-Plugin-File-Version': project.version,
+                   'Rundeck-Plugin-Author': sopsCopyright,
+                   'Rundeck-Plugin-URL': sopsUrl,
+                   'Rundeck-Plugin-Date': buildDateString
+    }
+}
+
+
+task build(dependsOn: 'pluginZip') << {
+
+}
+
+task clean(type: Delete) {
+    delete('build')
+}
+
+pluginZip.doFirst {
+    def assetsDir = "${project.buildDir}/assets/resources"
+    def assetsMap = new Properties()
+    def assetsManifest = file("${assetsDir}/manifest.properties")
+    assetsManifest.withInputStream(assetsMap.&load)
+    def tokens = assetsMap + [
+            version    : project.version,
+            date       : new Date().toString(),
+            author     : sopsCopyright,
+            url        : sopsUrl,
+            title      : pluginName,
+            description: pluginDescription,
+            name       : archivesBaseName.toString(),
+    ]
+    copy {
+        //load asset mapping
+        from(assetsDir) {
+            into 'resources'
+        }
+        from("${project.projectDir}/src/main/rdplugin") {
+            filter(ReplaceTokens, tokens: tokens)
+            exclude "assets"
+        }
+        into "${project.buildDir}/zip-contents"
+    }
+}
+
+project.pluginZip.dependsOn 'assetCompile'
+project.pluginZip.mustRunAfter 'assetCompile'
+
+
+artifacts {
+    add('default', pluginZip)
+}

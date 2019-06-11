@@ -1,0 +1,155 @@
+svg#ui-jobgraph-svg-canvas {
+  overflow: hidden;
+  margin: 0 auto;
+  font-family: 'Muli', 'Helvetica', Arial, sans-serif;
+}
+
+svg#ui-jobgraph-svg-canvas g.label {
+  display: block;
+  padding: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  text-align: left;
+  white-space: normal;
+  vertical-align: text-bottom;
+  border-radius: 0;
+}
+
+svg#ui-jobgraph-svg-canvas .node {
+  white-space: nowrap;
+}
+
+svg#ui-jobgraph-svg-canvas .node.notfound rect {
+  stroke: #f77;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_sunny rect {
+  stroke: #070;
+  color: #070;
+  fill: #afa;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_sunny h1,
+svg#ui-jobgraph-svg-canvas .node.weather_sunny h2,
+svg#ui-jobgraph-svg-canvas .node.weather_sunny h3 {
+  color: #070;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_partial rect {
+  stroke: #444;
+  color: #444;
+  fill: #ccc;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_partial h1,
+svg#ui-jobgraph-svg-canvas .node.weather_partial h2,
+svg#ui-jobgraph-svg-canvas .node.weather_partial h3 {
+  color: #444;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_cloudy rect {
+  stroke: #f70;
+  color: #f70;
+  fill: #fdb;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_cloudy h1,
+svg#ui-jobgraph-svg-canvas .node.weather_cloudy h2,
+svg#ui-jobgraph-svg-canvas .node.weather_cloudy h3 {
+  color: #f70;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_stormy rect {
+  stroke: #b44;
+  color: #b44;
+  fill: #f99;
+}
+
+svg#ui-jobgraph-svg-canvas .node.weather_stormy h1,
+svg#ui-jobgraph-svg-canvas .node.weather_stormy h2,
+svg#ui-jobgraph-svg-canvas .node.weather_stormy h3 {
+  color: #b44;
+}
+
+svg#ui-jobgraph-svg-canvas .node rect,
+svg#ui-jobgraph-svg-canvas .node circle,
+svg#ui-jobgraph-svg-canvas .node ellipse {
+  stroke: #999;
+  fill: #fff;
+  stroke-width: 1.5px;
+}
+
+svg#ui-jobgraph-svg-canvas .cluster rect {
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+
+svg#ui-jobgraph-svg-canvas .edgePath path.path {
+  stroke: #999;
+  fill: none;
+  stroke-width: 1.5px;
+}
+
+svg#ui-jobgraph-svg-canvas text {
+  font-weight: 300;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serf;
+  font-size: 14px;
+}
+
+svg#ui-jobgraph-svg-canvas ol,
+svg#ui-jobgraph-svg-canvas ul {
+  margin: 0;
+  padding-left: 1em;
+}
+
+svg#ui-jobgraph-svg-canvas p,
+svg#ui-jobgraph-svg-canvas li {
+  color: #444;
+  font-size: 12px;
+  margin: 0;
+}
+
+svg#ui-jobgraph-svg-canvas p,
+svg#ui-jobgraph-svg-canvas h1,
+svg#ui-jobgraph-svg-canvas h2,
+svg#ui-jobgraph-svg-canvas h3 {
+  color: black;
+  font-size: 14px;
+  margin: 0;
+}
+
+svg#ui-jobgraph-svg-canvas .edgePath.ehandler_ref path.path {
+  fill: #f88;
+  stroke: #aaa;
+}
+
+svg#ui-jobgraph-svg-canvas path.arrowhead_missing_ref {
+  fill: #aaa;
+  stroke: #aaa;
+}
+
+svg#ui-jobgraph-svg-canvas .edgePath.conditional_ref path.path {
+  fill: #080;
+  stroke: #080;
+}
+
+svg#ui-jobgraph-svg-canvas path.arrowhead_conditional_ref {
+  fill: #080;
+  stroke: #080;
+}
+
+svg#ui-jobgraph-svg-canvas .edgePath.ehandler_ref path.path {
+  fill: #f80;
+  stroke: #f80;
+}
+
+svg#ui-jobgraph-svg-canvas path.arrowhead_ehandler_ref {
+  stroke: #f80;
+  fill: #f80;
+}
+
+svg#ui-jobgraph-svg-canvas path.node_step_ref {
+  stroke-dasharray: 5, 5;
+}

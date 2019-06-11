@@ -1,0 +1,47 @@
+<div class="dropdown dropdown-form ">
+    <a href="#" class="dropdown-toggle btn btn-simple btn-muted" data-toggle="dropdown" role="button"
+       aria-haspopup="true" aria-expanded="false">
+        %%Options%%
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu " data-click-stop-propagation>
+        <li>
+            <a href="#" data-bind="click: jobgraph.printChart">
+                <i class="fas fa-save"></i> %%Save SVG%%
+            </a>
+        </li>
+        <li role="presentation" class="dropdown-header">
+            %%Graph Options%%
+        </li>
+        <li class="form-item ">
+            <div class="checkbox">
+                <input type="checkbox" id="ui-jobGraphRankLR" data-bind="checked: jobgraph.graph.graphRankLR">
+                <label for="ui-jobGraphRankLR">%%Left-to-Right%%</label>
+            </div>
+
+            <div class="checkbox">
+                <input id="ui-jobDoTruncate" type="checkbox" data-bind="checked: jobgraph.doTruncate">
+                <label for="ui-jobDoTruncate">%%Truncate long labels%%</label>
+            </div>
+
+            <div class="checkbox">
+                <input id="ui-jobShowConditionals" type="checkbox" data-bind="checked: jobgraph.showConditionals">
+                <label for="ui-jobShowConditionals">%%Conditionals%%</label>
+            </div>
+
+            <div class="checkbox">
+                <input id="ui-jobShowErrorHandlers" type="checkbox" data-bind="checked: jobgraph.showErrorHandlers">
+                <label for="ui-jobShowErrorHandlers">%%Error Handlers%%</label>
+            </div>
+
+            <!-- ko if: jobgraph.jobdashboard()!=null -->
+            <div class="checkbox">
+                <input id="ui-jobColorize" type="checkbox" data-bind="checked: jobgraph.colorize">
+                <label>%%Dashboard Weather Color%%</label>
+            </div>
+            <!-- /ko -->
+        </li>
+
+
+    </ul>
+</div>
