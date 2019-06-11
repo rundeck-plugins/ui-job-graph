@@ -136,7 +136,6 @@ function jobgraph_load_messages_async(pluginName, plugini18nBase, path) {
 }
 
 function jobgraph_init_plugin(pluginName, callback) {
-    console.log("init")
     //_plugins.push(function () {
         //rdpro_setup_ko_extenders();
         jobgraph_load_messages_async(pluginName, _url_path(rundeckPage.pluginBasei18nUrl(pluginName)), "i18n/messages.properties")

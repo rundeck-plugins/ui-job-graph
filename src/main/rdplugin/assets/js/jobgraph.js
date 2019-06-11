@@ -1,20 +1,5 @@
-//= require DagreD3Graph
-
-/*
- * Copyright 2016 SimplifyOps, Inc. (http://simplifyops.com)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+//= require lib/DagreD3Graph
+//= require lib/support
 
 jQuery(function () {
   "use strict";
@@ -208,7 +193,6 @@ jQuery(function () {
             group: jobgroup
           };
         });
-        console.log(JSON.stringify(joblist))
         var maxWidth = jQuery('.card-content').width();
         loadJobListData(joblist, function () {
           jQuery("#ui-jobgraph").resizable({
@@ -459,7 +443,6 @@ jQuery(function () {
 
   function loadJobShowPageData() {
     var jobDetail = loadJsonData('jobDetail');
-    console.log(JSON.stringify(jobDetail))
     var maxWidth = jQuery('.card-content').width();
     loadJobListData([jobDetail], function () {
       jQuery("#ui-jobgraph").resizable({
