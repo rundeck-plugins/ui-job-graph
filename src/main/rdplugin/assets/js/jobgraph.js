@@ -417,9 +417,7 @@ jQuery(function () {
 
     self.load = function (id) {
       return jQuery.ajax({
-        url: _genUrl(appLinks.scheduledExecutionWorkflowJson, {
-          id: id
-        }),
+        url: "/api/34/job/" + id + "/workflow",
         method: 'GET',
         contentType: 'json'
         // success:function(data){ }
@@ -427,11 +425,7 @@ jQuery(function () {
     };
     self.find = function (group, name) {
       return jQuery.ajax({
-        url: _genUrl(appLinks.menuJobsAjax, {
-          project: project,
-          jobExactFilter: name,
-          groupPathExact: group
-        }),
+        url: "/api/34/" + project + "/jobs?jobExactFilter=" + name + "&groupPathExact=" + group,
         method: 'GET',
         contentType: 'json'
         // success:function(data){ }
