@@ -417,7 +417,7 @@ jQuery(function () {
 
     self.load = function (id) {
       return jQuery.ajax({
-        url: "/api/34/job/" + id + "/workflow",
+        url: "/api/" + appLinks.api_version + "/job/" + id + "/workflow",
         method: 'GET',
         contentType: 'json'
         // success:function(data){ }
@@ -425,13 +425,12 @@ jQuery(function () {
     };
     self.find = function (group, name) {
       return jQuery.ajax({
-        url: "/api/34/" + project + "/jobs?jobExactFilter=" + name + "&groupPathExact=" + group,
+        url: "/api/" + appLinks.api_version + "/" + project + "/jobs?jobExactFilter=" + name + "&groupPathExact=" + group,
         method: 'GET',
         contentType: 'json'
         // success:function(data){ }
       });
     };
-
 
   }
 
