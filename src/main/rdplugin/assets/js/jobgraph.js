@@ -308,6 +308,7 @@ jQuery(function () {
 
   function JobDataLoader() {
     var self = this;
+    var apiBase = window._rundeck.rdBase + '/api/' + window._rundeck.apiVersion;
     self.jobdata = {};
     self.undefjobs = {};
     self.undef = 0;
@@ -417,7 +418,7 @@ jQuery(function () {
 
     self.load = function (id) {
       return jQuery.ajax({
-        url: "/api/" + appLinks.api_version + "/job/" + id + "/workflow",
+        url: apiBase + "/job/" + id + "/workflow",
         method: 'GET',
         contentType: 'json'
         // success:function(data){ }
@@ -425,7 +426,7 @@ jQuery(function () {
     };
     self.find = function (group, name) {
       return jQuery.ajax({
-        url: "/api/" + appLinks.api_version + "/" + project + "/jobs?jobExactFilter=" + name + "&groupPathExact=" + group,
+        url: apiBase + "/" + project + "/jobs?jobExactFilter=" + name + "&groupPathExact=" + group,
         method: 'GET',
         contentType: 'json'
         // success:function(data){ }
