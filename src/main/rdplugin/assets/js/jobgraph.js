@@ -482,7 +482,8 @@ jQuery(function () {
             if (data && data.length == 1) {
               var jobobj = data[0];
               var jid = jobobj.id;
-              loader.load(jid).success(function (data2) {
+//              loader.load(jid).success(function (data2) {
+              loader.load(jid).done(function (data2) {
                 var count = loader.loadJobData(jid, jobgroup, jobname, data2, joblist);
                 loadNextJob(final)
               });
@@ -490,7 +491,8 @@ jQuery(function () {
           });
         }
       } else if (loader.jobdata[jobid] == null) {
-        loader.load(jobid).success(function (data) {
+        loader.load(jobid).done(function (data) {
+//        loader.load(jobid).success(function (data) {
           var count = loader.loadJobData(jobid, jobgroup, jobname, data, joblist);
           loadNextJob(final)
         });
