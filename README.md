@@ -1,3 +1,7 @@
+# DEPRECATED
+
+This plugin is no longer supported.  Please check out updated version at [https://github.com/rundeck-plugins/ui-job-metrics](https://github.com/rundeck-plugins/ui-job-metrics)
+
 ## UI Job Graph
 
 Displays DAG of Jobs based on Job References.
